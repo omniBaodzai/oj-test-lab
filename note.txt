@@ -1,0 +1,107 @@
+- Do mình chưa từng tiếp xúc  công nghệ này:
+
+Hàng đợi: Redis và BullMQ – Quản lý và xử lý các bài nộp bất đồng bộ, giúp hệ thống hoạt động ổn định và tối ưu hiệu năng.
+-mình cần bạn giải thích ngắn gọn vai trò của nó Và minh họa bằng lời cho mình luồng quy trình để mình hiểu, và mình cần cài chúng về máy windows không, hay nó có sẵn?
+
+Frontend: React, TypeScript, Vite – Xây dựng giao diện người dùng.
+
+Code editor: Monaco Editor – Soạn thảo mã nguồn trực tiếp trên trình duyệt.
+
+Backend: NestJS, TypeScript – Xây dựng REST API, xác thực người dùng và xử lý nghiệp vụ bài toán, bài nộp (submission).
+
+Database: PostgreSQL – Lưu trữ thông tin người dùng, bài toán, metadata của bộ kiểm thử (test), bài nộp và kết quả chấm.
+
+Judge Engine: Judge0 CE – Biên dịch, thực thi mã nguồn và trả về kết quả chấm bài.
+
+Triển khai: Docker và Ubuntu Server (Linux). – Đóng gói, triển khai và vận hành các dịch vụ của hệ thống.
+
+Hàng đợi: Redis và BullMQ – Quản lý và xử lý các bài nộp bất đồng bộ, giúp hệ thống hoạt động ổn định và tối ưu hiệu năng.
+
+fe 5173
+ba: 3000
+postgre 5432
+
+docker compose up -d postgres redis backend frontend
+
+docker compose logs --tail 100 backend
+Push-Location backend
+npm run build
+npm run lint
+Pop-Location
+
+Push-Location frontend
+npm run build
+npm run lint
+Pop-Location
+
+
+docker compose restart
+
+docker compose restart backend
+
+docker compose restart frontend
+
+docker compose logs --tail 100 backend
+
+docker compose up -d --build
+
+docker compose down
+
+docker compose up -d
+docker compose up -d --build backend frontend
+docker compose logs --tail=80 backend
+hostname -I
+Ubuntu trả về 3 địa chỉ:
+- 192.168.101.152 — IP của máy ảo VMware, chúng ta cần dùng IP này.
+- 172.18.0.1 — IP mạng Docker nội bộ.
+- 172.17.0.1 — IP mạng Docker nội bộ.
+
+Một lưu ý quan trọng: Địa chỉ 192.168.101.152 là IP của máy ảo. Nếu IP thay đổi, backend sẽ mất kết nối. Về sau chúng ta nên đặt IP cố định cho Ubuntu.
+PS C:\Users\btech> Invoke-RestMethod http://192.168.101.152:2358/about
+
+version homepage           source_code                      maintainer
+------- --------           -----------                      ----------
+1.13.1  https://judge0.com https://github.com/judge0/judge0 Herman Zvonimir Došilović <hermanz.dosilovic@gmail.com>
+
+
+PS C:\Users\btech>
+
+
+Trong dự án D:\uth-online-judge, chúng ta sẽ sử dụng địa chỉ:
+JUDGE0_API_URL=http://192.168.101.152:2358
+
+
+docker compose exec backend node -e "fetch('http://192.168.101.152:2358/about').then(r=>r.json()).then(console.log).catch(console.error)"
+PS D:\uth-online-judge> docker compose exec backend node -e "fetch('http://192.168.101.152:2358/about').then(r=>r.json()).then(console.log).catch(console.error)"
+{
+  version: '1.13.1',
+  homepage: 'https://judge0.com',
+  source_code: 'https://github.com/judge0/judge0',
+  maintainer: 'Herman Zvonimir Došilović <hermanz.dosilovic@gmail.com>'
+}
+PS D:\uth-online-judge>
+backend NestJS chạy trong Docker Desktop trên Windows đã kết nối được với Judge0 trên Ubuntu VMware.
+
+
+
+
+
+python -m venv .venv
+
+.\.venv\Scripts\Activate.ps1
+
+
+Nếu server đã dừng, mở PowerShell:
+cd D:\oj-test-lab
+.\.venv314\Scripts\Activate.ps1
+python -m pip install -e .
+
+
+Sau đó bật chức năng sinh test và chạy server:
+$env:OJ_TEST_LAB_ENABLE_UNTRUSTED_EXEC="1"
+python -m uvicorn oj_test_lab.web.app:app --host 127.0.0.1 --port 8000
+
+Remove-Item Env:OJ_TEST_LAB_ENABLE_UNTRUSTED_EXEC -ErrorAction SilentlyContinue
+
+$env:OJ_TEST_LAB_ENABLE_UNTRUSTED_EXEC="1"
+python -m uvicorn oj_test_lab.web.app:app --host 127.0.0.1 --port 8000

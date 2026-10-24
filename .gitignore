@@ -1,0 +1,30 @@
+# Generated output
+output/
+# User-authored problem specifications and future AI/derived artifacts (local data)
+workspace/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# Virtual environments
+.venv/
+.venv*/
+venv/
+env/
+
+.env
+.env.*
+!.env.example
+# Generated artifacts and local workspace
+output/
+workspace/
+
+# Local editor and OS files
+.vscode/
+.DS_Store
+Thumbs.db

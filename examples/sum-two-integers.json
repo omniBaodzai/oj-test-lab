@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "sum-two-integers",
+  "title": "Tổng hai số nguyên",
+  "statement": "Cho hai số nguyên a và b. Hãy tính tổng của chúng.",
+  "input_description": "Một dòng chứa hai số nguyên a và b.",
+  "output_description": "In ra tổng a + b.",
+  "constraints": [
+    "-1000000000 <= a, b <= 1000000000"
+  ],
+  "samples": [
+    { "input": "2 3", "output": "5" }
+  ],
+  "desired_test_count": 100
+}

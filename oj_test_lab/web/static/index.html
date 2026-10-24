@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OJ Test Lab</title><link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header><p class="eyebrow">LOCAL TEST WORKSHOP</p><h1>OJ Test Lab</h1><p class="lede">Từ đặc tả bài toán đến bộ test có thể kiểm tra và tải xuống.</p></header>
+    <section class="panel"><h2>1. Problem</h2>
+      <div class="grid"><label>Problem ID<input id="id" value="sum-two-integers"></label><label>Title<input id="title" value="Tổng hai số nguyên"></label></div>
+      <label>Statement<textarea id="statement">Cho hai số nguyên a và b, hãy in tổng của chúng.</textarea></label>
+      <div class="grid"><label>Input description<textarea id="input">Một dòng gồm a và b.</textarea></label><label>Output description<textarea id="output">In a + b.</textarea></label></div>
+      <label>Constraints<textarea id="constraints">-1000000000 <= a, b <= 1000000000</textarea></label>
+      <div class="grid"><label>Sample input<textarea id="sample-in">2 3</textarea></label><label>Sample output<textarea id="sample-out">5</textarea></label></div>
+      <div class="grid"><label>Test count<input id="count" type="number" min="1" max="1000" value="20"></label><label>Seed<input id="seed" type="number" min="0" value="42"></label></div>
+      <div class="actions"><button id="save">Save problem</button><button id="analyze">Analyze AI</button><button id="code">Generate code</button><button id="validate">Validate code</button><button id="edit">Edit code</button><button id="repair">Repair with AI</button><button id="approve">Review &amp; approve</button><button id="generate">Generate tests</button></div>
+      <div class="resume-row"><button id="load">Load saved problem</button><label>Saved code proposals<select id="proposals"><option value="">Select a saved proposal</option></select></label></div>
+    </section>
+    <section class="panel"><h2>2. Review</h2><div id="status" class="status">Ready.</div><p class="active">Active proposal: <strong id="active-code">None</strong></p><p id="proposal-meta" class="meta">No proposal selected.</p><pre id="analysis"></pre><div class="grid"><pre id="generator"></pre><pre id="reference"></pre></div></section>
+    <section id="editor" class="panel" hidden><h2>Edit selected proposal</h2><label>Python generator<textarea id="generator-edit" spellcheck="false"></textarea></label><label>C++17 reference<textarea id="reference-edit" spellcheck="false"></textarea></label><div class="actions"><button id="save-edit">Save as New Proposal</button><button id="cancel-edit">Cancel</button></div></section>
+    <section id="questions-panel" class="panel"><h2>Open Questions</h2><div id="questions"><p class="meta">No proposal selected.</p></div></section>
+    <section class="panel"><h2>3. Results</h2><div id="results"></div><a id="download" class="download" hidden>Download tests.zip</a></section>
+  </main><script src="/static/app.js"></script>
+</body></html>
