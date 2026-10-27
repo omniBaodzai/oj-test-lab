@@ -14,7 +14,7 @@
       <label>Constraints<textarea id="constraints">-1000000000 <= a, b <= 1000000000</textarea></label>
       <div class="grid"><label>Sample input<textarea id="sample-in">2 3</textarea></label><label>Sample output<textarea id="sample-out">5</textarea></label></div>
       <div class="grid"><label>Test count<input id="count" type="number" min="1" max="1000" value="20"></label><label>Seed<input id="seed" type="number" min="0" value="42"></label></div>
-      <div class="actions"><button id="save">Save problem</button><button id="analyze">Analyze AI</button><button id="code">Generate code</button><button id="validate">Validate code</button><button id="edit">Edit code</button><button id="repair">Repair with AI</button><button id="approve">Review &amp; approve</button><button id="generate">Generate tests</button></div>
+      <div class="actions"><button id="save">1. Save problem</button><button id="analyze">2. Analyze AI</button><button id="code">3. Generate code</button><button id="validate">4. Validate code</button><button id="edit">5. Edit code</button><button id="repair">6. Repair with AI</button><button id="approve">7. Review &amp; approve</button><button id="generate">8. Generate tests</button></div>
       <div class="resume-row"><button id="load">Load saved problem</button><label>Saved code proposals<select id="proposals"><option value="">Select a saved proposal</option></select></label></div>
     </section>
     <section class="panel"><h2>2. Review</h2><div id="status" class="status">Ready.</div><p class="active">Active proposal: <strong id="active-code">None</strong></p><p id="proposal-meta" class="meta">No proposal selected.</p><pre id="analysis"></pre><div class="grid"><pre id="generator"></pre><pre id="reference"></pre></div></section>

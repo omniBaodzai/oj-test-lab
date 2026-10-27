@@ -66,7 +66,7 @@ version homepage           source_code                      maintainer
 
 PS C:\Users\btech>
 
-
+sudo shutdown -h now
 Trong dự án D:\uth-online-judge, chúng ta sẽ sử dụng địa chỉ:
 JUDGE0_API_URL=http://192.168.101.152:2358
 
@@ -83,7 +83,7 @@ PS D:\uth-online-judge>
 backend NestJS chạy trong Docker Desktop trên Windows đã kết nối được với Judge0 trên Ubuntu VMware.
 
 
-
+docker logs uth-online-judge-backend --since 15m --tail 150
 
 
 python -m venv .venv
@@ -96,7 +96,7 @@ cd D:\oj-test-lab
 .\.venv314\Scripts\Activate.ps1
 python -m pip install -e .
 
-
+deactivate
 Sau đó bật chức năng sinh test và chạy server:
 $env:OJ_TEST_LAB_ENABLE_UNTRUSTED_EXEC="1"
 python -m uvicorn oj_test_lab.web.app:app --host 127.0.0.1 --port 8000
@@ -105,3 +105,66 @@ Remove-Item Env:OJ_TEST_LAB_ENABLE_UNTRUSTED_EXEC -ErrorAction SilentlyContinue
 
 $env:OJ_TEST_LAB_ENABLE_UNTRUSTED_EXEC="1"
 python -m uvicorn oj_test_lab.web.app:app --host 127.0.0.1 --port 8000
+
+
+
+PS C:\Users\btech> cd D:\judge0-windows\extracted\judge0-v1.13.1
+PS D:\judge0-windows\extracted\judge0-v1.13.1> docker compose -p judge0-local config --quiet
+PS D:\judge0-windows\extracted\judge0-v1.13.1> docker compose -p judge0-local up -d
+[+] up 5/5
+ ✔ Network judge0-local_default     Created                                                                         0.4s
+ ✔ Container judge0-local-workers-1 Started                                                                        17.4s
+ ✔ Container judge0-local-server-1  Started                                                                         8.6s
+ ✔ Container judge0-local-redis-1   Started                                                                        10.9s
+ ✔ Container judge0-local-db-1      Started                                                                        15.1s
+PS D:\judge0-windows\extracted\judge0-v1.13.1> docker compose -p judge0-local ps -a
+NAME                     IMAGE                      COMMAND                  SERVICE   CREATED          STATUS          PORTS
+judge0-local-db-1        postgres:16.2              "docker-entrypoint.s…"   db        20 seconds ago   Up 8 seconds    5432/tcp
+judge0-local-redis-1     redis:7.2.4                "docker-entrypoint.s…"   redis     20 seconds ago   Up 11 seconds   6379/tcp
+judge0-local-server-1    mrkushalsm/judge0:latest   "/api/docker-entrypo…"   server    20 seconds ago   Up 13 seconds   127.0.0.1:2359->2358/tcp
+judge0-local-workers-1   mrkushalsm/judge0:latest   "/api/docker-entrypo…"   workers   20 seconds ago   Up 4 seconds    2358/tcp
+PS D:\judge0-windows\extracted\judge0-v1.13.1> curl.exe --max-time 15 http://127.0.0.1:2359/about
+curl: (52) Empty reply from server
+PS D:\judge0-windows\extracted\judge0-v1.13.1>
+curl.exe -i --max-time 15 http://127.0.0.1:2359/about
+docker exec uth-online-judge-backend node -e "fetch('http://judge0-local-server-1:2358/about').then(async r => { console.log('HTTP Status:', r.status); console.log('Response:', await r.text()); }).catch(e => { console.error('Error:', e.message); console.error('Cause:', e.cause); process.exitCode = 1; })"
+
+
+
+
+
+docker exec uth-online-judge-backend node -e "fetch('http://judge0-local-server-1:2358/submissions/c2de2924-6eae-4fdb-ac4b-57de68fafd8d?base64_encoded=false',{signal:AbortSignal.timeout(10000)}).then(async r=>{const x=await r.json();console.log('HTTP:',r.status);console.log('Status:',x.status?.description);console.log('Output:',x.stdout);console.log('Compile Output:',x.compile_output);console.log('Message:',x.message)}).catch(e=>console.error('ERROR:',e.message,e.cause))"
+
+
+
+
+
+
+
+
+
+docker compose stop
+cd D:\judge0-windows\extracted\judge0-v1.13.1
+docker compose up -d
+
+
+docker compose -p judge0-local stop
+cd D:\judge0-windows\extracted\judge0-v1.13.1
+docker compose -p judge0-local up -d
+
+
+
+
+
+
+# Dừng UTH Online Judge
+cd D:\uth-online-judge
+docker compose stop
+
+# Dừng Judge0
+cd D:\judge0-windows\extracted\judge0-v1.13.1
+docker compose -p judge0-local stop
+
+
+
+
